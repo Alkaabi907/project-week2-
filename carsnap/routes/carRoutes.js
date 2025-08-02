@@ -1,19 +1,29 @@
 const express = require('express');
 const router = express.Router();
 const carController = require('../controllers/carController');
-const { requireAuth } = require('../middleware/authMiddleware');
 
-// Public routes
+// All cars
 router.get('/', carController.index);
 
-// Protected routes (ثابتة أولاً)
-router.get('/new', requireAuth, carController.newForm);
-router.get('/:id/edit', requireAuth, carController.editForm);
-router.put('/:id', requireAuth, carController.update);
-router.delete('/:id', requireAuth, carController.destroy);
-router.post('/', requireAuth, carController.create);
+// My cars
+router.get('/mine', carController.myCars);
 
-// Dynamic route (آخر شيء)
+// New car form
+router.get('/new', carController.new);
+
+// Create car
+router.post('/', carController.create);
+
+// Show car
 router.get('/:id', carController.show);
+
+// Edit form
+router.get('/:id/edit', carController.edit);
+
+// Update car
+router.put('/:id', carController.update);
+
+// Delete car
+router.delete('/:id', carController.destroy);
 
 module.exports = router;

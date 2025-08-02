@@ -5,7 +5,7 @@ const carSchema = new mongoose.Schema({
   model:       String,
   year:        Number,
   price:       Number,
-  image:       String,
+  imageUrl:    String, // ✅ Renamed from "image" to "imageUrl"
   description: String,
   owner:       { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 }, { timestamps: true });

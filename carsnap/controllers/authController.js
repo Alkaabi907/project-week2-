@@ -2,17 +2,17 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// عرض نموذج تسجيل الدخول
+// Show login form
 const loginForm = (req, res) => {
-  res.render('auth/Login'); // تأكد من وجود views/auth/Login.jsx
+  res.render('auth/Login'); // Make sure views/auth/Login.jsx exists
 };
 
-// عرض نموذج التسجيل
+// Show signup form
 const registerForm = (req, res) => {
-  res.render('auth/Signup'); // تأكد من وجود views/auth/Signup.jsx
+  res.render('auth/Signup'); // Make sure views/auth/Signup.jsx exists
 };
 
-// التعامل مع التسجيل
+// Handle user signup
 const handleSignup = async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -21,13 +21,15 @@ const handleSignup = async (req, res) => {
       return res.status(400).send('Please fill all fields');
     }
 
+    // Check if username or email already exists
     const userExists = await User.findOne({ $or: [{ username }, { email }] });
     if (userExists) {
       return res.status(409).send('Username or email already taken');
     }
 
+    // Create and save new user (password hashing handled in model)
     const newUser = new User({ username, email, password });
-    await newUser.save(); // هاش كلمة المرور يتم تلقائياً في الموديل
+    await newUser.save();
 
     res.redirect('/auth/login');
   } catch (err) {
@@ -36,16 +38,16 @@ const handleSignup = async (req, res) => {
   }
 };
 
-// التعامل مع تسجيل الدخول (يمكن بـ username أو email)
+// Handle user login (by username or email)
 const handleLogin = async (req, res) => {
   try {
-    const { login, password } = req.body; // الحقل login يكون اسم المستخدم أو الايميل
+    const { login, password } = req.body;
 
     if (!login || !password) {
       return res.status(400).send('Please enter username/email and password');
     }
 
-    // البحث بالمستخدم بناء على username أو email
+    // Find user by username or email
     const user = await User.findOne({ 
       $or: [{ username: login }, { email: login }]
     });
@@ -54,13 +56,16 @@ const handleLogin = async (req, res) => {
       return res.status(401).send('Invalid credentials');
     }
 
+    // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(401).send('Invalid credentials');
     }
 
-    // إنشاء JWT مع صلاحية 1 ساعة
+    // Create JWT token valid for 1 hour
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    // Store token in cookie
     res.cookie('token', token, { httpOnly: true });
 
     res.redirect('/cars');
@@ -70,10 +75,10 @@ const handleLogin = async (req, res) => {
   }
 };
 
-// تسجيل الخروج
+// Handle logout
 const handleLogout = (req, res) => {
-  res.clearCookie('token');
-  res.redirect('/');
+  res.clearCookie('token'); // Remove token from cookie
+  res.redirect('/auth/login'); // ✅ Redirect to login page
 };
 
 module.exports = {
