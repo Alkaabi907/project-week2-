@@ -1,24 +1,29 @@
-import React from 'react';
+const React = require('react');
 
-export default function Signup() {
+function Signup() {
   return (
     <html>
       <head>
         <title>Signup</title>
+        <link rel="stylesheet" href="/css/signup.css" />
       </head>
       <body>
-        <h1>Create a CarSnap Account</h1>
-        <form action="/auth/signup" method="POST">
-          <label>Email:</label>
-          <input type="email" name="email" required />
-          <br />
-          <label>Password:</label>
-          <input type="password" name="password" required />
-          <br />
-          <button type="submit">Sign Up</button>
-        </form>
-        <p>Already have an account? <a href="/auth/login">Login here</a></p>
+        <div className="signup-container">
+          <h1>Create a CarSnap Account</h1>
+          <form action="/auth/signup" method="POST">
+            <label htmlFor="email">Email:</label>
+            <input type="email" id="email" name="email" required />
+            
+            <label htmlFor="password">Password:</label>
+            <input type="password" id="password" name="password" required />
+            
+            <button type="submit">Sign Up</button>
+          </form>
+          <p>Already have an account? <a href="/auth/login">Login here</a></p>
+        </div>
       </body>
     </html>
   );
 }
+
+module.exports = Signup;

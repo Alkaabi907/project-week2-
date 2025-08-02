@@ -11,7 +11,7 @@ const loginForm = (req, res) => {
 
 // Show register form
 const registerForm = (req, res) => {
-  res.render('auth/Register');
+  res.render('auth/signup');
 };
 
 // Handle registration
