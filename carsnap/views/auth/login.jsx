@@ -1,16 +1,27 @@
 const React = require('react');
-const Layout = require('../layout');
 
 function Login() {
   return (
-    <Layout title="Login">
-      <h1>Login</h1>
-      <form method="POST" action="/auth/login">
-        <input type="email" name="email" placeholder="Email" required /><br />
-        <input type="password" name="password" placeholder="Password" required /><br />
-        <button>Login</button>
+    <div className="login-container">
+      <link rel='stylesheet' href='/css/login.css'></link>
+      <h1>Login to CarSnap</h1>
+      <form action="/auth/login" method="POST">
+        <label htmlFor="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Username" required />
+        
+        <label htmlFor="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Password" required />
+        
+        <button type="submit">Login</button>
       </form>
-    </Layout>
+      
+      <p style={{ marginTop: '1.5rem', fontSize: '0.9rem' }}>
+        Don't have an account?{' '}
+        <a href="/auth/signup" style={{ color: '#667eea', textDecoration: 'none', fontWeight: '600' }}>
+          Create one
+        </a>
+      </p>
+    </div>
   );
 }
 

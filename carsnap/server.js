@@ -21,6 +21,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));
 app.use(cookieParser());
+
+// Serve static files from public folder
 app.use(express.static('public'));
 
 // View Engine
