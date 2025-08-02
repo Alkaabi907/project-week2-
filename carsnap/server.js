@@ -5,13 +5,11 @@ const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 
-// Routes
-const carRoutes = require('./routes/carRoutes');
+const carRoutes = require('./routes/carRoutes');  // عندك أو تنشئ هذا لو مطلوب
 const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
-// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ Connected to MongoDB'))
   .catch(err => console.error('❌ MongoDB error:', err));
@@ -21,8 +19,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));
 app.use(cookieParser());
-
-// Serve static files from public folder
 app.use(express.static('public'));
 
 // View Engine
@@ -38,7 +34,7 @@ app.get('/', (req, res) => {
   res.redirect('/cars');
 });
 
-// 404
+// 404 handler
 app.use((req, res) => {
   res.status(404).render('notFound');
 });

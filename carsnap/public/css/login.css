@@ -1,124 +1,65 @@
-/* Reset بسيط */
-* {
-  box-sizing: border-box;
-}
-
+/* login.css */
+/* نفس تصميم signup تقريباً */
 body {
   margin: 0;
-  height: 100vh;
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #667eea, #764ba2);
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
   color: #333;
 }
 
 .login-container {
   background: #fff;
-  padding: 3rem 2.5rem;
-  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  width: 360px;
-  max-width: 90vw;
+  width: 350px;
   text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.login-container:hover {
-  transform: translateY(-5px);
 }
 
 .login-container h1 {
   margin-bottom: 1.5rem;
-  font-weight: 700;
-  font-size: 2rem;
-  color: #4a4a4a;
 }
 
 .login-container label {
   display: block;
   text-align: left;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
   font-weight: 600;
-  color: #555;
-  font-size: 0.9rem;
 }
 
-.login-container input[type="text"],
-.login-container input[type="password"] {
+.login-container input {
   width: 100%;
-  padding: 0.85rem 1.2rem;
-  margin-bottom: 1.4rem;
+  padding: 0.7rem;
+  margin-bottom: 1rem;
   border: 2px solid #ddd;
-  border-radius: 12px;
+  border-radius: 10px;
   font-size: 1rem;
   transition: border-color 0.3s ease;
-  font-weight: 500;
-  color: #444;
 }
 
-.login-container input[type="text"]:focus,
-.login-container input[type="password"]:focus {
+.login-container input:focus {
   border-color: #667eea;
   outline: none;
-  box-shadow: 0 0 8px rgba(102,126,234,0.6);
+  box-shadow: 0 0 8px rgba(102,126,234,0.5);
 }
 
 .login-container button {
   width: 100%;
-  padding: 0.9rem;
+  padding: 0.85rem;
   border: none;
   border-radius: 12px;
   background: #667eea;
   color: white;
   font-weight: 700;
-  font-size: 1.15rem;
   cursor: pointer;
-  box-shadow: 0 6px 10px rgba(102,126,234,0.4);
-  transition: background 0.3s ease;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
 }
 
 .login-container button:hover {
   background: #5a6ddc;
-  box-shadow: 0 8px 15px rgba(90,109,220,0.5);
-}
-
-/* تحديث خاص للفقرة اللي فيها رابط التسجيل */
-.login-container p {
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
-  color: #555;
-}
-
-.login-container p a {
-  color: #667eea;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
-
-.login-container p a:hover {
-  color: #5a6ddc;
-  text-decoration: underline;
-}
-
-/* لو عندك رابط "Forgot Password" ممكن تضيف له هنا */
-.login-container .forgot-password {
-  margin-top: -1rem;
-  margin-bottom: 1.4rem;
-  text-align: right;
-}
-
-.login-container .forgot-password a {
-  font-size: 0.85rem;
-  color: #667eea;
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
-
-.login-container .forgot-password a:hover {
-  color: #5a6ddc;
-  text-decoration: underline;
 }

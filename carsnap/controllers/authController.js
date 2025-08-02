@@ -1,37 +1,55 @@
-// controllers/authController.js
-
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// Show login form
+// عرض نموذج تسجيل الدخول
 const loginForm = (req, res) => {
-  res.render('auth/Login');
+  res.render('auth/Login'); // تأكد من وجود views/auth/Login.jsx
 };
 
-// Show register form
+// عرض نموذج التسجيل
 const registerForm = (req, res) => {
-  res.render('auth/signup');
+  res.render('auth/Signup'); // تأكد من وجود views/auth/Signup.jsx
 };
 
-// Handle registration
-const handleRegister = async (req, res) => {
+// التعامل مع التسجيل
+const handleSignup = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    await User.create({ username, password: hashedPassword });
+    const { username, email, password } = req.body;
+
+    if (!username || !email || !password) {
+      return res.status(400).send('Please fill all fields');
+    }
+
+    const userExists = await User.findOne({ $or: [{ username }, { email }] });
+    if (userExists) {
+      return res.status(409).send('Username or email already taken');
+    }
+
+    const newUser = new User({ username, email, password });
+    await newUser.save(); // هاش كلمة المرور يتم تلقائياً في الموديل
+
     res.redirect('/auth/login');
   } catch (err) {
-    console.error(err);
-    res.status(500).send('Error during registration');
+    console.error('Signup error:', err);
+    res.status(500).send('Error during signup');
   }
 };
 
-// Handle login
+// التعامل مع تسجيل الدخول (يمكن بـ username أو email)
 const handleLogin = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
+    const { login, password } = req.body; // الحقل login يكون اسم المستخدم أو الايميل
+
+    if (!login || !password) {
+      return res.status(400).send('Please enter username/email and password');
+    }
+
+    // البحث بالمستخدم بناء على username أو email
+    const user = await User.findOne({ 
+      $or: [{ username: login }, { email: login }]
+    });
+
     if (!user) {
       return res.status(401).send('Invalid credentials');
     }
@@ -41,27 +59,27 @@ const handleLogin = async (req, res) => {
       return res.status(401).send('Invalid credentials');
     }
 
-    // Create JWT token
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+    // إنشاء JWT مع صلاحية 1 ساعة
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.cookie('token', token, { httpOnly: true });
-    res.redirect('/cars'); // or wherever the user should go after login
+
+    res.redirect('/cars');
   } catch (err) {
-    console.error(err);
+    console.error('Login error:', err);
     res.status(500).send('Login error');
   }
 };
 
-// Handle logout
+// تسجيل الخروج
 const handleLogout = (req, res) => {
   res.clearCookie('token');
   res.redirect('/');
 };
 
-// ✅ Export all functions
 module.exports = {
   loginForm,
   registerForm,
-  handleRegister,
+  handleSignup,
   handleLogin,
-  handleLogout
+  handleLogout,
 };
