@@ -1,3 +1,5 @@
+const React = require('react');
+
 function Layout({ title = 'CarSnap', children, customCss, hideAuthLinks = false }) {
   return (
     <html>
@@ -26,4 +28,4 @@ function Layout({ title = 'CarSnap', children, customCss, hideAuthLinks = false 
   );
 }
 
-export default Layout;
+module.exports = Layout;

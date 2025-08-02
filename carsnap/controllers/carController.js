@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Car = require('../models/Car');
 
 // Show all cars
@@ -8,7 +9,16 @@ const index = async (req, res) => {
 
 // Show one car
 const show = async (req, res) => {
-  const car = await Car.findById(req.params.id);
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).render('NotFound', { title: 'Car Not Found' });
+  }
+
+  const car = await Car.findById(id);
+  if (!car) {
+    return res.status(404).render('NotFound', { title: 'Car Not Found' });
+  }
+
   res.render('cars/show', { car });
 };
 
@@ -25,19 +35,38 @@ const create = async (req, res) => {
 
 // Edit form
 const editForm = async (req, res) => {
-  const car = await Car.findById(req.params.id);
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).render('NotFound', { title: 'Car Not Found' });
+  }
+
+  const car = await Car.findById(id);
+  if (!car) {
+    return res.status(404).render('NotFound', { title: 'Car Not Found' });
+  }
+
   res.render('cars/edit', { car });
 };
 
 // Update car
 const update = async (req, res) => {
-  await Car.findByIdAndUpdate(req.params.id, req.body);
-  res.redirect(`/cars/${req.params.id}`);
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).render('NotFound', { title: 'Car Not Found' });
+  }
+
+  await Car.findByIdAndUpdate(id, req.body);
+  res.redirect(`/cars/${id}`);
 };
 
 // Delete car
 const destroy = async (req, res) => {
-  await Car.findByIdAndDelete(req.params.id);
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).render('NotFound', { title: 'Car Not Found' });
+  }
+
+  await Car.findByIdAndDelete(id);
   res.redirect('/cars');
 };
 

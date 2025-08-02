@@ -5,13 +5,15 @@ const { requireAuth } = require('../middleware/authMiddleware');
 
 // Public routes
 router.get('/', carController.index);
-router.get('/:id', carController.show);
 
-// Protected routes
+// Protected routes (ثابتة أولاً)
 router.get('/new', requireAuth, carController.newForm);
-router.post('/', requireAuth, carController.create);
 router.get('/:id/edit', requireAuth, carController.editForm);
 router.put('/:id', requireAuth, carController.update);
 router.delete('/:id', requireAuth, carController.destroy);
+router.post('/', requireAuth, carController.create);
+
+// Dynamic route (آخر شيء)
+router.get('/:id', carController.show);
 
 module.exports = router;
