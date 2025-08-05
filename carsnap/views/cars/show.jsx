@@ -18,6 +18,11 @@ function Show({ car, userId }) {
       <p><strong>Price:</strong> {car.price} BHD</p>
       <p><strong>Description:</strong> {car.description || 'No description provided.'}</p>
 
+      {/* ✅ Display phone number if available */}
+      {car.phone && (
+        <p><strong>Phone Number:</strong> {car.phone}</p>
+      )}
+
       {/* Debug info */}
       <p style={{ fontSize: '0.9rem', color: '#888' }}>
         Logged in user: {userId}<br />

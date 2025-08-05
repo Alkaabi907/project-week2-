@@ -1,26 +1,38 @@
 const React = require('react');
 const Layout = require('../layout');
 
-function New() {
+function New({ error }) {
   return (
     <Layout title="Sell a Car">
-      <h1>Sell Your Car</h1>
+      <h1>Sell a Car</h1>
+      <div className='sellCar'>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <form method="POST" action="/cars">
-        {/* Car title */}
-        <input name="title" placeholder="Car Title" required /><br />
+        <label>Company:</label>
+        <input name="make" required />
 
-        {/* Image URL - fixed name */}
-        <input name="imageUrl" placeholder="Image URL" required /><br />
+        <label>Brand:</label>
+        <input name="model" required />
 
-        {/* Price */}
-        <input name="price" placeholder="Price (BHD)" required /><br />
+        <label>Year:</label>
+        <input type="number" name="year" required />
 
-        {/* Description */}
-        <textarea name="description" placeholder="Description" required></textarea><br />
+        <label>Price:</label>
+        <input type="number" name="price" required />
 
-        {/* Submit button */}
-        <button>Post Car</button>
+        <label>Description:</label>
+        <textarea name="description"></textarea>
+
+        <label>Image URL:</label>
+        <input name="imageUrl" />
+
+        <label>Phone Number:</label>
+        <input name="phone" required />
+
+        <button type="submit">Post Car</button>
       </form>
+
+      </div>
     </Layout>
   );
 }

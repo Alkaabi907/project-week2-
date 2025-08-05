@@ -1,13 +1,17 @@
 const mongoose = require('mongoose');
 
 const carSchema = new mongoose.Schema({
-  make:        String,
-  model:       String,
-  year:        Number,
-  price:       Number,
-  imageUrl:    String, // ✅ Renamed from "image" to "imageUrl"
+  make: String,
+  model: String,
+  year: Number,
+  price: Number,
   description: String,
-  owner:       { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
-}, { timestamps: true });
+  imageUrl: String,
+  phone: String, // ✅ NEW FIELD
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
+});
 
 module.exports = mongoose.model('Car', carSchema);

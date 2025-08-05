@@ -2,14 +2,29 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+  
+    
 }
 
+.carContainer {
+  display: flex;
+
+}
+
+/* Overlay container for better text contrast */
+.container {
+  background-color: rgba(0, 0, 0, 0.6); /* semi-transparent dark background */
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+/* Links */
 a {
   text-decoration: none;
-  color: #0077cc;
+  color: #66ccff;
 }
 
 a:hover {
@@ -18,17 +33,19 @@ a:hover {
 
 /* Navigation Bar */
 nav {
-  background-color: #fff;
+  background-color: rgba(0, 0, 0, 0.8);
   padding: 1rem 2rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #444;
   display: flex;
   align-items: center;
   gap: 1rem;
   font-size: 1rem;
+  color: white;
 }
 
 nav a {
   font-weight: bold;
+  color: white;
 }
 
 nav form {
@@ -55,7 +72,7 @@ main {
 
 /* Headings */
 h1, h2, h3 {
-  color: #222;
+  color: white;
 }
 
 /* Lists */
@@ -66,7 +83,7 @@ ul {
 
 li {
   padding: 0.5rem 0;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #666;
 }
 
 /* Forms */
@@ -95,4 +112,10 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #005fa3;
+}
+.sellCar{
+
+
+
+  
 }
