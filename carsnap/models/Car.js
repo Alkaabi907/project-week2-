@@ -11,7 +11,13 @@ const carSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
+  },
+  likes: [
+  {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
   }
+]
 });
 
 module.exports = mongoose.model('Car', carSchema);

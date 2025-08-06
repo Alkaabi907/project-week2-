@@ -5,9 +5,12 @@ const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const jwt = require('jsonwebtoken');
+const session = require('express-session')
+const jsxEngine = require('jsx-view-engine')
 
 const carRoutes = require('./routes/carRoutes');
 const authRoutes = require('./routes/authRoutes');
+
 
 const app = express();
 
@@ -40,8 +43,14 @@ app.use((req, res, next) => {
 
 // ✅ View Engine
 app.set('view engine', 'jsx');
-app.engine('jsx', require('express-react-views').createEngine());
-app.set('views', path.join(__dirname, 'views'));
+app.engine('jsx', jsxEngine())
+app.use(
+  session({
+    secret: process.env.JWT_SECRET,
+    resave: false,
+    saveUninitialized: false
+  })
+)
 
 // ✅ Routes
 app.use('/cars', carRoutes);
@@ -49,7 +58,7 @@ app.use('/auth', authRoutes);
 
 // ✅ Home redirect
 app.get('/', (req, res) => {
-  res.redirect('/cars');
+  res.send('/cars');
 });
 
 // ✅ 404 handler

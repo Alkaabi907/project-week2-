@@ -25,6 +25,12 @@ function Index({ cars, userId }) {
             {/* View link */}
             <a href={`/cars/${car._id}`} className="view-btn">View</a>
 
+            {/* Like button */}
+            <form method="POST" action={`/cars/${car._id}/like`} style={{ display: 'inline' }}>
+              <button type="submit" className="like-btn">❤️ Like</button>
+              
+            </form>
+<p><strong>Likes:</strong> {car.likes?.length || 0}</p>
             {/* Owner controls */}
             {car.owner?._id.toString() === userId && (
               <div className="owner-controls">

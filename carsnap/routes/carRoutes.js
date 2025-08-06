@@ -26,4 +26,6 @@ router.put('/:id', carController.update);
 // Delete car
 router.delete('/:id', carController.destroy);
 
+router.post('/:id/like', carController.like)
+
 module.exports = router;

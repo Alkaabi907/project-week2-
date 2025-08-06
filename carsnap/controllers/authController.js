@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 // Show login form
@@ -42,15 +42,17 @@ const handleSignup = async (req, res) => {
 const handleLogin = async (req, res) => {
   try {
     const { login, password } = req.body;
+    // Find user by username or email
+    const user = await User.findOne({ 
+      $or: [{ username: login }, { email: login }]
+    });
+    console.log(user)
+    req.session.userId = user._id;
 
     if (!login || !password) {
       return res.status(400).send('Please enter username/email and password');
     }
 
-    // Find user by username or email
-    const user = await User.findOne({ 
-      $or: [{ username: login }, { email: login }]
-    });
 
     if (!user) {
       return res.status(401).send('Invalid credentials');

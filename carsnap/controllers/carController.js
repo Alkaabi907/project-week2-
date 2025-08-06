@@ -122,6 +122,39 @@ const myCars = async (req, res) => {
   }
 };
 
+const like = async (req, res) => {
+  const carId = req.params.id;
+  const userId = req.userId;
+  console.log('➡️ Like request:', { carId, userId });
+  if (!userId) {
+    console.log('⛔️ Not logged in!');
+    return res.redirect('/auth/login');
+  }
+  try {
+    const car = await Car.findById(carId);
+
+    if (!car) {
+      console.log('❌ Car not found');
+      return res.status(404).send('Car not found');
+    }
+
+    const alreadyLiked = car.likes.includes(userId);
+    console.log(`✅ Car found, Already liked: ${alreadyLiked}`);
+
+    if (alreadyLiked) {
+      car.likes = car.likes.filter((id) => id.toString() !== userId);
+    } else {
+      car.likes.push(userId);
+    }
+    await car.save();
+    console.log('✅ Like updated and saved');
+    res.redirect('/cars');
+  } catch (err) {
+    console.error('🔥 Error while liking car:', err);
+    res.status(500).send('Something went wrong while liking the car.');
+  }
+};
+
 module.exports = {
   index,
   new: newCar,
@@ -130,5 +163,6 @@ module.exports = {
   edit,
   update,
   destroy,
-  myCars
+  myCars,
+  like
 };

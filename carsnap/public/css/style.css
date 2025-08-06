@@ -296,3 +296,18 @@ button[type="submit"]:hover {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+.like-btn {
+  background-color: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.like-btn:hover {
+  background-color: #ff1a1a;
+}
