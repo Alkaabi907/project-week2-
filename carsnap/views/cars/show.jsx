@@ -6,51 +6,48 @@ function Show({ car, userId }) {
 
   return (
     <Layout title={car.title} isLoggedIn={!!userId}>
-      <h1>{car.title}</h1>
+      
+      <div className="car-details-card">
+        <h1 style={{ fontSize: '2.5rem', color: '#0077cc', marginBottom: '1rem' }}>{car.title}</h1>
 
-      <img
-        src={car.imageUrl || '/images/default-car.jpg'}
-        alt={car.title}
-        width="300"
-        style={{ borderRadius: '8px', marginBottom: '1rem' }}
-      /><br />
+        <img
+          src={car.imageUrl || '/images/default-car.jpg'}
+          alt={car.title}
+          style={{
+            width: '100%',
+            maxWidth: '700px',
+            borderRadius: '12px',
+            boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
+            margin: '2rem auto',
+            display: 'block'
+          }}
+        />
 
-      <p><strong>Price:</strong> {car.price} BHD</p>
-      <p><strong>Description:</strong> {car.description || 'No description provided.'}</p>
+        <p style={{ fontSize: '1.5rem', color: '#444' }}><strong>💰 Price:</strong> {car.price} BHD</p>
+        <p style={{ fontSize: '1.2rem' }}><strong>📝 Description:</strong> {car.description || 'No description provided.'}</p>
 
-      {/* ✅ Display phone number if available */}
-      {car.phone && (
-        <p><strong>Phone Number:</strong> {car.phone}</p>
-      )}
+        {car.phone && (
+          <p style={{ fontSize: '1.2rem' }}><strong>📞 Phone:</strong> {car.phone}</p>
+        )}
 
-      {/* Debug info */}
-      <p style={{ fontSize: '0.9rem', color: '#888' }}>
-        Logged in user: {userId}<br />
-        Car owner: {String(ownerId)}
-      </p>
+        <p style={{ fontSize: '0.9rem', color: '#888', marginTop: '1rem' }}>
+          Logged in user: {userId}<br />
+          Car owner: {String(ownerId)}
+        </p>
 
-      {/* Edit/Delete buttons for owner only */}
-      {userId && ownerId && String(userId) === String(ownerId) && (
-        <div style={{ marginTop: '1rem' }}>
-          <a href={`/cars/${car._id}/edit`} style={{ marginRight: '1rem' }}>✏️ Edit</a>
-          <form method="POST" action={`/cars/${car._id}?_method=DELETE`} style={{ display: 'inline' }}>
-            <button type="submit" style={{
-              backgroundColor: '#ff4d4d',
-              color: 'white',
-              border: 'none',
-              padding: '0.5rem 1rem',
-              borderRadius: '4px',
-              cursor: 'pointer'
-            }}>
-              🗑️ Delete
-            </button>
-          </form>
+        {userId && ownerId && String(userId) === String(ownerId) && (
+          <div className="owner-controls">
+            <a href={`/cars/${car._id}/edit`} className="edit-btn">✏️ Edit</a>
+            <form method="POST" action={`/cars/${car._id}?_method=DELETE`} style={{ display: 'inline' }}>
+              <button type="submit" className="delete-btn">🗑️ Delete</button>
+            </form>
+          </div>
+        )}
+
+        <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+          <a href="/cars" className="view-btn">← Back to All Cars</a>
+          <a href="/cars/new" className="view-btn">➕ Add Another Car</a>
         </div>
-      )}
-
-      <div style={{ marginTop: '2rem' }}>
-        <a href="/cars" style={{ marginRight: '1rem' }}>← Back to All Cars</a>
-        <a href="/cars/new">➕ Add Another Car</a>
       </div>
     </Layout>
   );

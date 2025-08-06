@@ -4,32 +4,44 @@ const Layout = require('../layout');
 function Index({ cars, userId }) {
   return (
     <Layout title="All Cars" isLoggedIn={!!userId}>
-      <h1>All Cars for Sale</h1>
-      <div className='carContainer'>
-      <ul>
+      <h1 className="page-title">All Cars for Sale</h1>
+
+      <div className="carContainer">
         {cars.map((car) => (
-          <li key={car._id}>
+          <div key={car._id} className="carCard">
+            
+            {/* Clickable image */}
+            <a href={`/cars/${car._id}`}>
               <img
-        src={car.imageUrl || '/images/default-car.jpg'}
-        alt={car.title}
-        width="300"
-        style={{ borderRadius: '8px', marginBottom: '1rem' }}
-      /><br />
-            <p>Price: ${car.price}</p>
-            <p>Posted by: {car.owner?.username || 'Unknown'}</p>
-            <a href={`/cars/${car._id}`}>View</a>
+                src={car.imageUrl || '/images/default-car.jpg'}
+                alt={car.title}
+                className="car-image"
+              />
+            </a>
+
+            <p><strong>Price:</strong> ${car.price}</p>
+            <p><strong>Posted by:</strong> {car.owner?.username || 'Unknown'}</p>
+
+            {/* View link */}
+            <a href={`/cars/${car._id}`} className="view-btn">View</a>
+
+            {/* Owner controls */}
             {car.owner?._id.toString() === userId && (
-              <>
-                {' | '}
-                <a href={`/cars/${car._id}/edit`}>Edit</a>
-                <form method="POST" action={`/cars/${car._id}?_method=DELETE`} style={{ display: 'inline' }}>
-                  <button type="submit">Delete</button>
+              <div className="owner-controls">
+                <a href={`/cars/${car._id}/edit`}>
+                  <button className="edit-btn">Edit</button>
+                </a>
+                <form
+                  method="POST"
+                  action={`/cars/${car._id}?_method=DELETE`}
+                  style={{ display: 'inline' }}
+                >
+                  <button type="submit" className="delete-btn">Delete</button>
                 </form>
-              </>
+              </div>
             )}
-          </li>
+          </div>
         ))}
-      </ul>
       </div>
     </Layout>
   );

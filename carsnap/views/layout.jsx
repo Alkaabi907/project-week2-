@@ -1,4 +1,5 @@
 const React = require('react');
+const Navbar = require('./Nav');
 
 function Layout({ title = 'CarSnap', children, customCss, isLoggedIn = false }) {
   return (
@@ -9,23 +10,11 @@ function Layout({ title = 'CarSnap', children, customCss, isLoggedIn = false }) 
         {customCss && <link rel="stylesheet" href={customCss} />}
       </head>
       <body>
-        <nav style={{ marginBottom: '2rem' }}>
-          <a href="/cars">🏠 Home</a> | 
-          <a href="/cars/new">➕ Sell a Car</a> | 
 
-          {!isLoggedIn ? (
-            <>
-              <a href="/auth/login">Login</a> | 
-              <a href="/auth/signup">Signup</a>
-            </>
-          ) : (
-            <form method="POST" action="/auth/logout" style={{ display: 'inline' }}>
-              <button type="submit">Logout</button>
-            </form>
-          )}
-        </nav>
+        <Navbar isLoggedIn={isLoggedIn} />
 
         <main>{children}</main>
+     
       </body>
     </html>
   );

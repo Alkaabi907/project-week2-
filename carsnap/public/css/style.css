@@ -1,10 +1,13 @@
-/* Reset & Base Styles */
+
 body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
-  
-    
+/*    
+     background-image: url("backGroun.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; */
 }
 
 .carContainer {
@@ -72,7 +75,7 @@ main {
 
 /* Headings */
 h1, h2, h3 {
-  color: white;
+  color: black;
 }
 
 /* Lists */
@@ -101,14 +104,14 @@ input, select, textarea {
   border-radius: 4px;
 }
 
-button[type="submit"] {
+/* button[type="submit"] {
   background-color: #0077cc;
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 4px;
   cursor: pointer;
-}
+} */
 
 button[type="submit"]:hover {
   background-color: #005fa3;
@@ -118,4 +121,178 @@ button[type="submit"]:hover {
 
 
   
+}
+
+
+/* Title */
+.page-title {
+  color: #0077cc;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Container for all car cards */
+.carContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* Each car card */
+.carCard {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 1rem;
+  width: 350px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.carCard:hover {
+  transform: scale(1.02);
+}
+
+/* Car image style */
+.car-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.carCard p {
+  margin: 0.5rem 0;
+}
+
+
+
+/* View button */
+.view-btn {
+  display: inline-block;
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+  background-color: #0077cc;
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.view-btn:hover {
+  background-color: #005fa3;
+}
+
+/* Edit button */
+.edit-btn {
+  background-color: #ffc107;
+  color: black;
+  border: none;
+  padding: 0.4rem 1rem;
+  margin-right: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.edit-btn:hover {
+  background-color: #e0a800;
+}
+
+/* Delete button */
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+/* Wrap edit + delete nicely */
+.owner-controls {
+  margin-top: 0.5rem;
+}
+
+
+
+
+
+
+
+
+
+
+.car-details-card {
+  background: linear-gradient(135deg, #ffffff, #f0f8ff);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+.view-btn {
+  display: inline-block;
+  margin: 0.5rem;
+  background-color: #0077cc;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.view-btn:hover {
+  background-color: #005fa3;
+}
+
+.edit-btn {
+  background-color: #ffc107;
+  color: black;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  margin-right: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.edit-btn:hover {
+  background-color: #e0a800;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+.owner-controls {
+  margin-top: 1rem;
+}
+
+
+.showRoom{
+     background-image: url("backGroun.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
