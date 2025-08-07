@@ -2,6 +2,8 @@
 
 CarSnap is a full-stack web app where users can post, edit, and delete car listings — similar to how Instagram works, but focused on car sales. Built with Express.js, MongoDB, and JSX views using the MVC architecture.
 
+<img width="1466" height="880" alt="Screenshot 2025-08-07 at 10 16 13 AM" src="https://github.com/user-attachments/assets/8b2ca813-6781-4dd2-b352-631b721fabf0" />
+
 ---
 
 ## 📦 Tech Stack
