@@ -30,7 +30,45 @@ CarSnap is a full-stack web app where users can post, edit, and delete car listi
 
 ---
 
-## 🗃️ Models
+## 🗃️ file structure
+```
+carsnap/
+├── controllers/
+│   ├── authController.js
+│   └── carController.js
+├── middleware/
+│   └── authMiddleware.js
+├── models/
+│   ├── Car.js
+│   └── User.js
+├── node_modules/
+├── public/
+│   └── css/
+│       ├── backGroun.jpg
+│       ├── login.css
+│       ├── signup.css
+│       └── style.css
+├── routes/
+│   ├── authRoutes.js
+│   └── carRoutes.js
+├── tests/
+│   ├── auth.test.js
+│   └── car.test.js
+├── views/
+│   ├── auth/
+│   ├── cars/
+│   ├── layout.jsx
+│   ├── Nav.jsx
+│   └── notFound.jsx
+├── .env
+├── .gitignore
+├── package-lock.json
+├── package.json
+├── server.js
+├── image.png
+└── README.md
+```
+
 
 ### 🚘 Car Model
 
