@@ -1,4 +1,4 @@
-# 🚗 CarSnap - Buy & Sell Cars Like Instagram
+# 🚗 CarSnap - Buy & Sell Cars 
 
 CarSnap is a full-stack web app where users can post, edit, and delete car listings — similar to how Instagram works, but focused on car sales. Built with Express.js, MongoDB, and JSX views using the MVC architecture.
 
